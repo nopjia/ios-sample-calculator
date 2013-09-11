@@ -114,7 +114,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="binaryOperationPressed:" destination="2" eventType="touchUpInside" id="xnN-d3-gxz"/>
+                                    <action selector="operationPressed:" destination="2" eventType="touchUpInside" id="d6v-3G-blZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoe-OP-s5d">
@@ -127,7 +127,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="binaryOperationPressed:" destination="2" eventType="touchUpInside" id="5a7-nK-cS2"/>
+                                    <action selector="operationPressed:" destination="2" eventType="touchUpInside" id="93O-WB-cm2"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EnJ-eF-R4v">
@@ -140,7 +140,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="unaryOperationPressed:" destination="2" eventType="touchUpInside" id="ymZ-eg-gJo"/>
+                                    <action selector="operationPressed:" destination="2" eventType="touchUpInside" id="sOI-ue-a4L"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qtd-PT-H7L">
@@ -226,7 +226,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="binaryOperationPressed:" destination="2" eventType="touchUpInside" id="H02-qt-bGc"/>
+                                    <action selector="operationPressed:" destination="2" eventType="touchUpInside" id="bgC-Kg-1Z1"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qIi-b1-wua">
@@ -239,7 +239,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="unaryOperationPressed:" destination="2" eventType="touchUpInside" id="kKK-VH-n9d"/>
+                                    <action selector="operationPressed:" destination="2" eventType="touchUpInside" id="z9N-pr-L5P"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Nt-SC-rZH">
@@ -291,7 +291,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="binaryOperationPressed:" destination="2" eventType="touchUpInside" id="08y-2z-S3C"/>
+                                    <action selector="operationPressed:" destination="2" eventType="touchUpInside" id="TvO-CL-GiV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dW7-tP-RET">
@@ -304,12 +304,22 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="unaryOperationPressed:" destination="2" eventType="touchUpInside" id="9wb-pg-Hln"/>
+                                    <action selector="operationPressed:" destination="2" eventType="touchUpInside" id="P6s-0B-4IK"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text=" " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puG-fV-zh7">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="257" id="ILX-Gk-aSR"/>
+                                    <constraint firstAttribute="height" constant="21" id="Iq7-dh-n5b"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="puG-fV-zh7" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="1UG-sH-ps4"/>
                             <constraint firstItem="Kjr-Fj-qFA" firstAttribute="top" secondItem="kZH-d2-e9M" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="2XW-wr-eoe"/>
                             <constraint firstItem="J3R-hG-Bkd" firstAttribute="leading" secondItem="UcU-ft-TSf" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="2iw-AL-Iyt"/>
                             <constraint firstItem="EnJ-eF-R4v" firstAttribute="baseline" secondItem="aoe-OP-s5d" secondAttribute="baseline" type="default" id="3Fd-i0-aUH"/>
@@ -339,6 +349,7 @@
                             <constraint firstItem="dW7-tP-RET" firstAttribute="leading" secondItem="IdX-kF-aZ1" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="RXr-MA-sAg"/>
                             <constraint firstItem="qtd-PT-H7L" firstAttribute="baseline" secondItem="sqc-hb-yI6" secondAttribute="baseline" type="default" id="TKf-uH-Yoz"/>
                             <constraint firstItem="qIi-b1-wua" firstAttribute="leading" secondItem="qtd-PT-H7L" secondAttribute="leading" type="default" id="VIe-us-ia3"/>
+                            <constraint firstAttribute="bottom" secondItem="puG-fV-zh7" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="VSq-mM-Tqe"/>
                             <constraint firstItem="oNq-mv-3Lx" firstAttribute="leading" secondItem="kZH-d2-e9M" secondAttribute="leading" type="default" id="WtJ-Nd-You"/>
                             <constraint firstItem="mfD-do-rUm" firstAttribute="leading" secondItem="IOQ-aY-Xoy" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="X4a-UH-lEo"/>
                             <constraint firstItem="dW7-tP-RET" firstAttribute="leading" secondItem="EnJ-eF-R4v" secondAttribute="leading" type="default" id="XAB-xI-Hc4"/>
@@ -381,6 +392,7 @@
                     <connections>
                         <outlet property="commands" destination="kZH-d2-e9M" id="4JZ-3p-UOT"/>
                         <outlet property="display" destination="Kjr-Fj-qFA" id="GTP-gq-dPh"/>
+                        <outlet property="stackView" destination="puG-fV-zh7" id="aRG-UW-rRo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -392,13 +404,13 @@
         <class className="CalculatorViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorViewController.h"/>
             <relationships>
-                <relationship kind="action" name="binaryOperationPressed:" candidateClass="UIButton"/>
                 <relationship kind="action" name="clearPressed:" candidateClass="UIButton"/>
                 <relationship kind="action" name="digitPressed:" candidateClass="UIButton"/>
+                <relationship kind="action" name="operationPressed:" candidateClass="UIButton"/>
                 <relationship kind="action" name="symbolPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="unaryOperationPressed:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="commands" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="display" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="stackView" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">

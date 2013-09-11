@@ -10,77 +10,100 @@
 
 @interface CalculatorModel ()
 
-@property (nonatomic, strong) NSMutableArray *operandStack;
+@property (nonatomic, strong) NSMutableArray *programStack;
 
 @end
 
 @implementation CalculatorModel
 
-@synthesize operandStack = _operandStack;
+@synthesize programStack = _programStack;
 
-- (NSMutableArray *)operandStack {
-    if (_operandStack == nil) _operandStack = [[NSMutableArray alloc] init];
-    return _operandStack;
+- (id)program {
+    // returns an immutable array copy
+    return [self.programStack copy];
+}
+
+- (NSMutableArray *)programStack {
+    if (_programStack == nil) _programStack = [[NSMutableArray alloc] init];
+    return _programStack;
 }
 
 - (void)clearStack {
-    [self.operandStack removeAllObjects];
+    [self.programStack removeAllObjects];
+}
+
+- (NSString *)printStack {
+    return [NSString stringWithFormat:@"%@", self.programStack];
 }
 
 - (void)pushOperand:(double)operand {
-    [self.operandStack addObject:[NSNumber numberWithDouble:operand]];
+    [self.programStack addObject:[NSNumber numberWithDouble:operand]];
 }
 
-- (double)popOperand {
-    NSNumber *operand = [self.operandStack lastObject];
-    if (operand) [self.operandStack removeLastObject];
-    return [operand doubleValue];
+- (double)performOperation:(NSString *)operation {
+    [self.programStack addObject:operation];
+    return [CalculatorModel runProgram:self.program];
 }
 
-- (double)performUnaryOperation:(NSString *)operation {
-    if ([self.operandStack count] < 1) return 0;
-    
++ (NSString *)programDesc:(id)program {
+    return @"TODO";
+}
+
++ (double)popOperand:(NSMutableArray *)stack
+{
     double result = 0;
     
-    if ([operation isEqualToString:@"sin"])
-        result = sin([self popOperand]);
-    else if ([operation isEqualToString:@"cos"])
-        result = cos([self popOperand]);
-    else if ([operation isEqualToString:@"√"])
-        result = sqrt([self popOperand]);
+    // pop top of stack
+    id topOfStack = [stack lastObject];
+    if (topOfStack) {
+        [stack removeLastObject];
+        NSLog(@"popped %@", topOfStack);
+    }    
     
-    [self pushOperand:result];
+    // introspection
+    
+    // if number, return that number
+    if ([topOfStack isKindOfClass:[NSNumber class]]) {
+        result = [topOfStack doubleValue];
+    }
+    // if operator, perform operation
+    else if ([topOfStack isKindOfClass:[NSString class]]) {
+        NSString *operation = topOfStack;
+        if ([operation isEqualToString:@"+"]) {
+            result = [self popOperand:stack] +
+                    [self popOperand:stack];
+        } else if ([operation isEqualToString:@"*"]) {
+            result = [self popOperand:stack] *
+                    [self popOperand:stack];
+        } else if ([operation isEqualToString:@"-"]) {
+            double subtrahend = [self popOperand:stack];
+            result = [self popOperand:stack] - subtrahend;
+        } else if ([operation isEqualToString:@"/"]) {
+            double divisor = [self popOperand:stack];
+            if (divisor) result = [self popOperand:stack] / divisor;
+        } else if ([operation isEqualToString:@"sin"]) {
+            result = sin( [self popOperand:stack] );
+        } else if ([operation isEqualToString:@"cos"]) {
+            result = cos( [self popOperand:stack] );
+        } else if ([operation isEqualToString:@"√"]) {
+            result = sqrt( [self popOperand:stack] );
+        }
+    }
     
     return result;
 }
 
-- (double)performBinaryOperation:(NSString *)operation {
-    // if one or less in stack
-    if ([self.operandStack count] <= 1)
-        return [[self.operandStack lastObject] doubleValue];
++ (double)runProgram:(id)program
+{
+    NSMutableArray *stack;
     
-    double result = 0;
-    
-    // perform operation    
-    if ([operation isEqualToString:@"+"]) {
-        result = [self popOperand] + [self popOperand];
-    }
-    else if ([operation isEqualToString:@"-"]) {
-        double subtractor = [self popOperand];
-        result = [self popOperand] - subtractor;
-    }
-    else if ([operation isEqualToString:@"*"]) {
-        result = [self popOperand] * [self popOperand];
-    }
-    else if ([operation isEqualToString:@"/"]) {
-        double divisor = [self popOperand];
-        result = [self popOperand] / divisor;
+    // check for Array type, make mutable copy
+    if ([program isKindOfClass:[NSArray class]]) {
+        stack = [program mutableCopy];
     }
     
-    // push result
-    [self pushOperand:result];
-    
-    return result;
+    // return result. if not Array type, zero.
+    return [self popOperand:stack];
 }
 
 @end

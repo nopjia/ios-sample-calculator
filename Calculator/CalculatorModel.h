@@ -11,9 +11,9 @@
 @interface CalculatorModel : NSObject
 
 - (void)pushOperand:(double)operand;
-- (double)performUnaryOperation:(NSString *)operation;
-- (double)performBinaryOperation:(NSString *)operation;
+- (double)performOperation:(NSString *)operation;
 - (void)clearStack;
+- (NSString *)printStack;
 
 @property (readonly) id program;
 

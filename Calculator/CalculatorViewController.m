@@ -20,6 +20,7 @@
 
 @synthesize display = _display;
 @synthesize commands = _commands;
+@synthesize stackView = _stackView;
 @synthesize userEnteringNumber = _userEnteringNumber;
 @synthesize calcModel = _calcModel;
 
@@ -30,6 +31,10 @@
     return _calcModel;
 }
 
+- (void)updateStackView {
+    self.stackView.text = self.calcModel.printStack;
+}
+
 - (void)recordCommand:(NSString *)str {
     self.commands.text = [NSString stringWithFormat:@"%@ %@", self.commands.text, str];
 }
@@ -38,6 +43,7 @@
     self.display.text = @" ";
     self.commands.text = @" ";
     [self.calcModel clearStack];
+    [self updateStackView];
 }
 
 - (IBAction)digitPressed:(UIButton *)sender {
@@ -64,24 +70,19 @@
     self.display.text = sender.currentTitle;
     self.userEnteringNumber = YES;
     [self enterPressed];
+    
+    [self updateStackView];
 }
 
-- (IBAction)unaryOperationPressed:(UIButton *)sender {
+- (IBAction)operationPressed:(UIButton *)sender {
     if (self.userEnteringNumber) {
         [self enterPressed];
     }
-    double result = [self.calcModel performUnaryOperation:sender.currentTitle];
+    double result = [self.calcModel performOperation:sender.currentTitle];
     self.display.text = [NSString stringWithFormat:@"%g", result];
     [self recordCommand:sender.currentTitle];
-}
-
-- (IBAction)binaryOperationPressed:(UIButton *)sender {
-    if (self.userEnteringNumber) {
-        [self enterPressed];
-    }
-    double result = [self.calcModel performBinaryOperation:sender.currentTitle];
-    self.display.text = [NSString stringWithFormat:@"%g", result];
-    [self recordCommand:sender.currentTitle];
+    
+    [self updateStackView];
 }
 
 - (IBAction)enterPressed {
@@ -105,6 +106,8 @@
     
     // record number
     [self recordCommand:self.display.text];
+
+    [self updateStackView];
 }
 
 @end
