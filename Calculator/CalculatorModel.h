@@ -15,4 +15,9 @@
 - (double)performBinaryOperation:(NSString *)operation;
 - (void)clearStack;
 
+@property (readonly) id program;
+
++ (double)runProgram:(id)program;
++ (NSString *)programDesc:(id)program;
+
 @end
