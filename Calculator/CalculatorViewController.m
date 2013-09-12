@@ -21,6 +21,7 @@
 @synthesize display = _display;
 @synthesize cmdView = _cmdView;
 @synthesize stackView = _stackView;
+@synthesize varsView = _varsView;
 @synthesize userEnteringNumber = _userEnteringNumber;
 @synthesize calcModel = _calcModel;
 
@@ -36,9 +37,7 @@
 }
 
 - (void)updateCmdView {
-    NSString *temp = [CalculatorModel programDesc:self.calcModel.program];
-    NSLog(@"%@",temp);
-    self.cmdView.text = temp;
+    self.cmdView.text = [CalculatorModel programDesc:self.calcModel.program];
 }
 
 - (IBAction)clearPressed:(UIButton *)sender {
@@ -107,5 +106,22 @@
     [self updateCmdView];
     [self updateStackView];
 }
+
+- (IBAction)testPressed:(UIButton *)sender {
+    NSNumber *varA = [NSNumber numberWithInt: (rand()%20)-10];
+    NSNumber *varB = [NSNumber numberWithInt: (rand()%20)-10];
+    NSNumber *varC = [NSNumber numberWithInt: (rand()%20)-10];
+    
+    NSDictionary *vars = [NSDictionary dictionaryWithObjectsAndKeys:
+                          varA, @"a", varB, @"b", varC, @"c", nil];
+    
+    self.display.text = [NSString stringWithFormat:@"%g",
+                         [CalculatorModel runProgram:self.calcModel.program
+                                            withVars:vars]];
+    
+    self.varsView.text = [NSString stringWithFormat:@"a=%@ b=%@ c=%@",
+                          varA, varB, varC];
+}
+
 
 @end

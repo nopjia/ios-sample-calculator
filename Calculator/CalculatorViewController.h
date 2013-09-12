@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *display;
 @property (weak, nonatomic) IBOutlet UILabel *stackView;
 @property (weak, nonatomic) IBOutlet UILabel *cmdView;
+@property (weak, nonatomic) IBOutlet UILabel *varsView;
 
 @end
