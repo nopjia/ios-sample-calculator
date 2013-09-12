@@ -51,13 +51,13 @@
     return [CalculatorModel runProgram:self.program];
 }
 
-+ (BOOL)isUnaryOperation: (NSString *)str {
-    NSSet *unary = [NSSet setWithObjects:@"sin", @"cos", @"tan", @"√", nil];
-    return [unary containsObject:str];
-}
 + (BOOL)isBinaryOperation: (NSString *)str {
     NSSet *binary = [NSSet setWithObjects:@"+", @"-", @"*", @"/", nil];
     return [binary containsObject:str];
+}
++ (BOOL)isUnaryOperation: (NSString *)str {
+    NSSet *unary = [NSSet setWithObjects:@"sin", @"cos", @"tan", @"log", @"sqrt", @"√", nil];
+    return [unary containsObject:str];
 }
 
 + (NSString *)programDescHelper:stack {
@@ -91,7 +91,7 @@
                       [self programDescHelper:stack]];
         }
         
-        // variable
+        // variable or symbol
         else {
             result = topOfStack;
         }
@@ -165,6 +165,14 @@
         }
         else if ([operation isEqualToString:@"√"]) {
             result = sqrt( [self popOperand:stack withVars:vars] );
+        }
+        
+        // symbols
+        else if ([operation isEqualToString:@"π"]) {
+            result = M_PI;
+        }
+        else if ([operation isEqualToString:@"e"]) {
+            result = M_E;
         }
         
         // variable
