@@ -56,11 +56,11 @@
     return [binary containsObject:str];
 }
 + (BOOL)isUnaryOperation: (NSString *)str {
-    NSSet *unary = [NSSet setWithObjects:@"sin", @"cos", @"tan", @"log", @"sqrt", @"√", nil];
+    NSSet *unary = [NSSet setWithObjects:@"sin", @"cos", @"tan", @"sqrt", @"√", @"ln", @"log", nil];
     return [unary containsObject:str];
 }
 
-+ (NSString *)programDescHelper:stack {
++ (NSString *)programDescHelper:(NSMutableArray *)stack {
     NSString *result = @"";
     
     // pop top of stack
@@ -78,10 +78,34 @@
     else if ([topOfStack isKindOfClass:[NSString class]]) {
         // binary operators
         if ([self isBinaryOperation:topOfStack]) {
+            // look ahead 2 steps (for parens)
+            NSString *opNext1 = [NSString stringWithFormat:@"%@",stack[stack.count-1]];
+            NSString *opNext2 = [NSString stringWithFormat:@"%@",stack[stack.count-2]];
+            
+            // recursive ops
             NSString *op1 = [self programDescHelper:stack];
             NSString *op2 = [self programDescHelper:stack];
-            result = [NSString stringWithFormat:@"(%@ %@ %@)",
-                      op2, topOfStack, op1];
+            
+            if ([topOfStack isEqualToString:@"*"] ||
+                [topOfStack isEqualToString:@"/"]) {
+                
+                // put parens around +/-
+                if ([opNext1 isEqualToString:@"+"] ||
+                    [opNext1 isEqualToString:@"-"]) {
+                    op1 = [NSString stringWithFormat:@"(%@)",op1];
+                }
+                if ([opNext2 isEqualToString:@"+"] ||
+                    [opNext2 isEqualToString:@"-"]) {
+                    op2 = [NSString stringWithFormat:@"(%@)",op2];
+                }
+                
+                result = [NSString stringWithFormat:@"%@ %@ %@",
+                          op2, topOfStack, op1];
+            }
+            else {
+                result = [NSString stringWithFormat:@"%@ %@ %@",
+                          op2, topOfStack, op1];
+            }
         }
         
         // unary operators
@@ -163,8 +187,14 @@
         else if ([operation isEqualToString:@"cos"]) {
             result = cos( [self popOperand:stack withVars:vars] );
         }
+        else if ([operation isEqualToString:@"tan"]) {
+            result = tan( [self popOperand:stack withVars:vars] );
+        }
         else if ([operation isEqualToString:@"√"]) {
             result = sqrt( [self popOperand:stack withVars:vars] );
+        }
+        else if ([operation isEqualToString:@"ln"]) {
+            result = log( [self popOperand:stack withVars:vars] );
         }
         
         // symbols
@@ -200,11 +230,6 @@
     
     // return result. if not Array type, zero.
     return [self popOperand:stack withVars:vars];
-}
-
-+ (double)varsInProgram:(id)program {
-    // TODO
-    return 0;
 }
 
 @end

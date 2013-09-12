@@ -108,17 +108,20 @@
 }
 
 - (IBAction)testPressed:(UIButton *)sender {
+    // generate random numbers
     NSNumber *varA = [NSNumber numberWithInt: (rand()%20)-10];
     NSNumber *varB = [NSNumber numberWithInt: (rand()%20)-10];
     NSNumber *varC = [NSNumber numberWithInt: (rand()%20)-10];
     
+    // construct dictionary
     NSDictionary *vars = [NSDictionary dictionaryWithObjectsAndKeys:
                           varA, @"a", varB, @"b", varC, @"c", nil];
     
+    // calculate
     self.display.text = [NSString stringWithFormat:@"%g",
                          [CalculatorModel runProgram:self.calcModel.program
                                             withVars:vars]];
-    
+    // display vars
     self.varsView.text = [NSString stringWithFormat:@"a=%@ b=%@ c=%@",
                           varA, varB, varC];
 }

@@ -22,6 +22,5 @@
 + (double)runProgram:(id)program;
 + (double)runProgram:(id)program
             withVars:(NSDictionary *)vars;
-+ (double)varsInProgram:(id)program;
 
 @end
