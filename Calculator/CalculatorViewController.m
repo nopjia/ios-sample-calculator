@@ -2,8 +2,8 @@
 //  CalculatorViewController.m
 //  Calculator
 //
-//  Created by Prutsdom Jiarathanakul on 9/10/13.
-//  Copyright (c) 2013 Prutsdom Jiarathanakul. All rights reserved.
+//  Created by Nop Jiarathanakul on 9/10/13.
+//  Copyright (c) 2013 Nop Jiarathanakul. All rights reserved.
 //
 
 #import "CalculatorViewController.h"

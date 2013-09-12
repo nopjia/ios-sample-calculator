@@ -3,7 +3,7 @@
 //  Calculator
 //
 //  Created by Nop Jiarathanakul on 9/10/13.
-//  Copyright (c) 2013 Prutsdom Jiarathanakul. All rights reserved.
+//  Copyright (c) 2013 Nop Jiarathanakul. All rights reserved.
 //
 
 #import "CalculatorModel.h"
@@ -79,8 +79,11 @@
         // binary operators
         if ([self isBinaryOperation:topOfStack]) {
             // look ahead 2 steps (for parens)
-            NSString *opNext1 = [NSString stringWithFormat:@"%@",stack[stack.count-1]];
-            NSString *opNext2 = [NSString stringWithFormat:@"%@",stack[stack.count-2]];
+            NSString *opNext1, *opNext2;
+            if (stack.count > 2) {
+                opNext1 = [NSString stringWithFormat:@"%@",stack[stack.count-1]];
+                opNext2 = [NSString stringWithFormat:@"%@",stack[stack.count-2]];
+            }
             
             // recursive ops
             NSString *op1 = [self programDescHelper:stack];
