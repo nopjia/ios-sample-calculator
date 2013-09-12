@@ -19,7 +19,7 @@
 @implementation CalculatorViewController
 
 @synthesize display = _display;
-@synthesize commands = _commands;
+@synthesize cmdView = _cmdView;
 @synthesize stackView = _stackView;
 @synthesize userEnteringNumber = _userEnteringNumber;
 @synthesize calcModel = _calcModel;
@@ -35,14 +35,25 @@
     self.stackView.text = self.calcModel.printStack;
 }
 
-- (void)recordCommand:(NSString *)str {
-    self.commands.text = [NSString stringWithFormat:@"%@ %@", self.commands.text, str];
+- (void)updateCmdView {
+    NSString *temp = [CalculatorModel programDesc:self.calcModel.program];
+    NSLog(@"%@",temp);
+    self.cmdView.text = temp;
 }
 
 - (IBAction)clearPressed:(UIButton *)sender {
     self.display.text = @" ";
-    self.commands.text = @" ";
+    self.cmdView.text = @" ";
+    self.stackView.text = @" ";
     [self.calcModel clearStack];
+}
+
+- (IBAction)undoPressed:(UIButton *)sender {
+    [self.calcModel removeLastOperand];
+    
+    self.display.text = [NSString stringWithFormat:@"%g",[CalculatorModel runProgram:self.calcModel.program]];
+    
+    [self updateCmdView];
     [self updateStackView];
 }
 
@@ -63,25 +74,14 @@
     }
 }
 
-- (IBAction)symbolPressed:(UIButton *)sender {
-    if (self.userEnteringNumber) {
-        [self enterPressed];
-    }
-    self.display.text = sender.currentTitle;
-    self.userEnteringNumber = YES;
-    [self enterPressed];
-    
-    [self updateStackView];
-}
-
 - (IBAction)operationPressed:(UIButton *)sender {
     if (self.userEnteringNumber) {
         [self enterPressed];
     }
     double result = [self.calcModel performOperation:sender.currentTitle];
     self.display.text = [NSString stringWithFormat:@"%g", result];
-    [self recordCommand:sender.currentTitle];
-    
+
+    [self updateCmdView];
     [self updateStackView];
 }
 
@@ -104,9 +104,7 @@
     [self.calcModel pushOperand:number];
     self.userEnteringNumber = NO;
     
-    // record number
-    [self recordCommand:self.display.text];
-
+    [self updateCmdView];
     [self updateStackView];
 }
 
