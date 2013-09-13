@@ -16,7 +16,7 @@
 
 @implementation CalculatorModel
 
-@synthesize programStack = _programStack;
+@synthesize programStack;
 
 - (id)program {
     // returns an immutable array copy
@@ -24,8 +24,10 @@
 }
 
 - (NSMutableArray *)programStack {
-    if (_programStack == nil) _programStack = [[NSMutableArray alloc] init];
-    return _programStack;
+    if (!programStack) {
+        programStack = [[NSMutableArray alloc] init];
+    }
+    return programStack;
 }
 
 - (void)clearStack {
@@ -51,11 +53,11 @@
     return [CalculatorModel runProgram:self.program];
 }
 
-+ (BOOL)isBinaryOperation: (NSString *)str {
++ (BOOL)isBinaryOperation:(NSString *)str {
     NSSet *binary = [NSSet setWithObjects:@"+", @"-", @"*", @"/", nil];
     return [binary containsObject:str];
 }
-+ (BOOL)isUnaryOperation: (NSString *)str {
++ (BOOL)isUnaryOperation:(NSString *)str {
     NSSet *unary = [NSSet setWithObjects:@"sin", @"cos", @"tan", @"sqrt", @"√", @"ln", @"log", nil];
     return [unary containsObject:str];
 }
@@ -144,16 +146,16 @@
 }
 
 + (double)popOperand:(NSMutableArray *)stack
-            withVars:(NSDictionary *)vars
-{
+            withVars:(NSDictionary *)vars {
     double result = 0;
     
     // pop top of stack
     id topOfStack = [stack lastObject];
-    if (topOfStack) {
-        [stack removeLastObject];
-        NSLog(@"popped %@", topOfStack);
+    if (!topOfStack) {
+        return result;
     }
+    [stack removeLastObject];
+    NSLog(@"popped %@", topOfStack);
     
     // introspection
     
@@ -168,43 +170,36 @@
         // binary operators
         if ([operation isEqualToString:@"+"]) {
             result = [self popOperand:stack withVars:vars] +
-                    [self popOperand:stack withVars:vars];
-        }
-        else if ([operation isEqualToString:@"*"]) {
+                     [self popOperand:stack withVars:vars];
+        } else if ([operation isEqualToString:@"*"]) {
             result = [self popOperand:stack withVars:vars] *
-                    [self popOperand:stack withVars:vars];
-        }
-        else if ([operation isEqualToString:@"-"]) {
+                     [self popOperand:stack withVars:vars];
+        } else if ([operation isEqualToString:@"-"]) {
             double subtrahend = [self popOperand:stack withVars:vars];
             result = [self popOperand:stack withVars:vars] - subtrahend;
-        }
-        else if ([operation isEqualToString:@"/"]) {
+        } else if ([operation isEqualToString:@"/"]) {
             double divisor = [self popOperand:stack withVars:vars];
             if (divisor) result = [self popOperand:stack withVars:vars] / divisor;
-        }
+            
+        } else
         
         // unary operators
-        else if ([operation isEqualToString:@"sin"]) {
-            result = sin( [self popOperand:stack withVars:vars] );
-        }
-        else if ([operation isEqualToString:@"cos"]) {
-            result = cos( [self popOperand:stack withVars:vars] );
-        }
-        else if ([operation isEqualToString:@"tan"]) {
-            result = tan( [self popOperand:stack withVars:vars] );
-        }
-        else if ([operation isEqualToString:@"√"]) {
-            result = sqrt( [self popOperand:stack withVars:vars] );
-        }
-        else if ([operation isEqualToString:@"ln"]) {
-            result = log( [self popOperand:stack withVars:vars] );
-        }
+        if ([operation isEqualToString:@"sin"]) {
+            result = sin([self popOperand:stack withVars:vars]);
+        } else if ([operation isEqualToString:@"cos"]) {
+            result = cos([self popOperand:stack withVars:vars]);
+        } else if ([operation isEqualToString:@"tan"]) {
+            result = tan([self popOperand:stack withVars:vars]);
+        } else if ([operation isEqualToString:@"√"]) {
+            result = sqrt([self popOperand:stack withVars:vars]);
+        } else if ([operation isEqualToString:@"ln"]) {
+            result = log([self popOperand:stack withVars:vars]);
+        } else
         
         // symbols
-        else if ([operation isEqualToString:@"π"]) {
+        if ([operation isEqualToString:@"π"]) {
             result = M_PI;
-        }
-        else if ([operation isEqualToString:@"e"]) {
+        } else if ([operation isEqualToString:@"e"]) {
             result = M_E;
         }
         
@@ -217,14 +212,13 @@
     return result;
 }
 
-+ (double)runProgram:(id)program
-{
++ (double)runProgram:(id)program {
     return [self runProgram:program withVars:nil];
 }
 
 + (double)runProgram:(id)program
             withVars:(NSDictionary *)vars {
-    NSMutableArray *stack;
+    NSMutableArray *stack = nil;
     
     // check for Array type, make mutable copy
     if ([program isKindOfClass:[NSArray class]]) {

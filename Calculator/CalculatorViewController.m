@@ -59,7 +59,7 @@
 - (IBAction)digitPressed:(UIButton *)sender {
     NSString *digit = sender.currentTitle;
     
-    // check illegal decimal
+    // Check illegal decimal
     if ([digit isEqualToString:@"."]) {
         if ([self.display.text rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"."]].location != NSNotFound)
         return;
@@ -85,21 +85,22 @@
 }
 
 - (IBAction)enterPressed {
-    // if not entering number
+    
+    // If not entering number
     if (!self.userEnteringNumber) {
         return;
     }
     
     double number = [self.display.text doubleValue];
     
-    // handle special symbols
+    // Handle special symbols
     if ([self.display.text isEqualToString:@"π"]) {
         number = M_PI;
     } else if ([self.display.text isEqualToString:@"e"]) {
         number = M_E;
     }
     
-    // push to stack
+    // Push to stack
     [self.calcModel pushOperand:number];
     self.userEnteringNumber = NO;
     
@@ -108,23 +109,23 @@
 }
 
 - (IBAction)testPressed:(UIButton *)sender {
-    // generate random numbers
-    NSNumber *varA = [NSNumber numberWithInt: (rand()%20)-10];
-    NSNumber *varB = [NSNumber numberWithInt: (rand()%20)-10];
-    NSNumber *varC = [NSNumber numberWithInt: (rand()%20)-10];
     
-    // construct dictionary
+    // Generate random numbers
+    NSNumber *varA = [NSNumber numberWithInt: (rand() % 20) - 10];
+    NSNumber *varB = [NSNumber numberWithInt: (rand() % 20) - 10];
+    NSNumber *varC = [NSNumber numberWithInt: (rand() % 20) - 10];
+    
+    // Construct dictionary
     NSDictionary *vars = [NSDictionary dictionaryWithObjectsAndKeys:
                           varA, @"a", varB, @"b", varC, @"c", nil];
     
-    // calculate
+    // Calculate
     self.display.text = [NSString stringWithFormat:@"%g",
                          [CalculatorModel runProgram:self.calcModel.program
                                             withVars:vars]];
-    // display vars
+    // Display vars
     self.varsView.text = [NSString stringWithFormat:@"a=%@ b=%@ c=%@",
                           varA, varB, varC];
 }
-
 
 @end
