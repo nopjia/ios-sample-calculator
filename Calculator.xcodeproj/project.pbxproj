@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3066742117E390470048B04C /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3066742017E390460048B04C /* GraphViewController.m */; };
+		3066742417E391AC0048B04C /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3066742317E391AC0048B04C /* GraphView.m */; };
+		306675A217E3956A0048B04C /* AxesDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 306675A117E3956A0048B04C /* AxesDrawer.m */; };
 		308767AF17DFA31B00393A95 /* CalculatorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 308767AE17DFA31B00393A95 /* CalculatorModel.m */; };
 		30DC0CDA17DF8D4000FD1C8B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30DC0CD917DF8D4000FD1C8B /* UIKit.framework */; };
 		30DC0CDC17DF8D4000FD1C8B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30DC0CDB17DF8D4000FD1C8B /* Foundation.framework */; };
@@ -22,6 +25,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3066741F17E390460048B04C /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
+		3066742017E390460048B04C /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
+		3066742217E391AC0048B04C /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
+		3066742317E391AC0048B04C /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
+		306675A017E3956A0048B04C /* AxesDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxesDrawer.h; sourceTree = "<group>"; };
+		306675A117E3956A0048B04C /* AxesDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxesDrawer.m; sourceTree = "<group>"; };
 		308767AD17DFA31B00393A95 /* CalculatorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorModel.h; sourceTree = "<group>"; };
 		308767AE17DFA31B00393A95 /* CalculatorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorModel.m; sourceTree = "<group>"; };
 		30DC0CD617DF8D4000FD1C8B /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,13 +95,19 @@
 		30DC0CDF17DF8D4000FD1C8B /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				306675A017E3956A0048B04C /* AxesDrawer.h */,
+				306675A117E3956A0048B04C /* AxesDrawer.m */,
 				30DC0CE817DF8D4000FD1C8B /* CalculatorAppDelegate.h */,
 				30DC0CE917DF8D4000FD1C8B /* CalculatorAppDelegate.m */,
-				30DC0CF117DF8D4000FD1C8B /* iPhone.storyboard */,
 				308767AD17DFA31B00393A95 /* CalculatorModel.h */,
 				308767AE17DFA31B00393A95 /* CalculatorModel.m */,
 				30DC0CF417DF8D4000FD1C8B /* CalculatorViewController.h */,
 				30DC0CF517DF8D4000FD1C8B /* CalculatorViewController.m */,
+				30DC0CF117DF8D4000FD1C8B /* iPhone.storyboard */,
+				3066741F17E390460048B04C /* GraphViewController.h */,
+				3066742017E390460048B04C /* GraphViewController.m */,
+				3066742217E391AC0048B04C /* GraphView.h */,
+				3066742317E391AC0048B04C /* GraphView.m */,
 				30DC0CE017DF8D4000FD1C8B /* Supporting Files */,
 			);
 			path = Calculator;
@@ -183,6 +198,9 @@
 				30DC0CEA17DF8D4000FD1C8B /* CalculatorAppDelegate.m in Sources */,
 				30DC0CF617DF8D4000FD1C8B /* CalculatorViewController.m in Sources */,
 				308767AF17DFA31B00393A95 /* CalculatorModel.m in Sources */,
+				3066742117E390470048B04C /* GraphViewController.m in Sources */,
+				3066742417E391AC0048B04C /* GraphView.m in Sources */,
+				306675A217E3956A0048B04C /* AxesDrawer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

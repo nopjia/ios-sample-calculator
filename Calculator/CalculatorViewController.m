@@ -21,7 +21,6 @@
 @synthesize display = _display;
 @synthesize cmdView = _cmdView;
 @synthesize stackView = _stackView;
-@synthesize varsView = _varsView;
 @synthesize userEnteringNumber = _userEnteringNumber;
 @synthesize calcModel = _calcModel;
 
@@ -106,26 +105,6 @@
     
     [self updateCmdView];
     [self updateStackView];
-}
-
-- (IBAction)testPressed:(UIButton *)sender {
-    
-    // Generate random numbers
-    NSNumber *varA = [NSNumber numberWithInt: (rand() % 20) - 10];
-    NSNumber *varB = [NSNumber numberWithInt: (rand() % 20) - 10];
-    NSNumber *varC = [NSNumber numberWithInt: (rand() % 20) - 10];
-    
-    // Construct dictionary
-    NSDictionary *vars = [NSDictionary dictionaryWithObjectsAndKeys:
-                          varA, @"a", varB, @"b", varC, @"c", nil];
-    
-    // Calculate
-    self.display.text = [NSString stringWithFormat:@"%g",
-                         [CalculatorModel runProgram:self.calcModel.program
-                                            withVars:vars]];
-    // Display vars
-    self.varsView.text = [NSString stringWithFormat:@"a=%@ b=%@ c=%@",
-                          varA, varB, varC];
 }
 
 @end
