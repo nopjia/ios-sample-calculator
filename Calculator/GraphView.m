@@ -23,6 +23,15 @@
 // setup method
 - (void)setup {
     self.contentMode = UIViewContentModeRedraw;
+    
+    [self addGestureRecognizer:
+     [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)]];
+    [self addGestureRecognizer:
+     [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)]];
+    
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
+    doubleTap.numberOfTapsRequired = 2;
+    [self addGestureRecognizer: doubleTap];
 }
 - (void)awakeFromNib {
     [self setup];
@@ -140,12 +149,11 @@
         newOrigin.y = self.origin.y + trans.y;
         self.origin = newOrigin;
         [gesture setTranslation:CGPointZero inView:self];
-        NSLog(@"PAN");
     }
 }
 
-- (void)tap:(UITapGestureRecognizer *)gesture {
-    
+- (void)doubleTap:(UITapGestureRecognizer *)gesture {
+    self.origin = [gesture locationInView:self];
 }
 
 @end
