@@ -10,7 +10,15 @@
 #import "AxesDrawer.h"
 #import "CalculatorModel.h"
 
+@interface GraphView()
+@property (nonatomic) CGFloat scale;
+@property (nonatomic) CGPoint origin;
+@end
+
 @implementation GraphView
+
+@synthesize scale = _scale;
+@synthesize origin = _origin;
 
 // setup method
 - (void)setup {
@@ -25,6 +33,41 @@
         [self setup];
     }
     return self;
+}
+
+#define DEFAULT_SCALE 50.0
+
+- (CGFloat)scale {
+    if (!_scale) {
+        return DEFAULT_SCALE;
+    } else {
+        return _scale;
+    }
+}
+- (void)setScale:(CGFloat)scale {
+    if (scale != _scale) {
+        _scale = scale;
+        [self setNeedsDisplay];
+    }
+}
+
+// defaults to center
+- (CGPoint)origin {
+    if (!_origin.x || !_origin.y) {
+        CGPoint center;
+        center.x = self.bounds.origin.x + self.bounds.size.width / 2;
+        center.y = self.bounds.origin.y + self.bounds.size.height / 2;
+        
+        return center;
+    } else {
+        return _origin;
+    }
+}
+- (void)setOrigin:(CGPoint)origin {
+    if (origin.x != _origin.x || origin.y != origin.y) {
+        _origin = origin;
+        [self setNeedsDisplay];
+    }
 }
 
 #define LINE_DETAIL 1
@@ -69,23 +112,40 @@
     
     // get CG context
     CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGPoint midPoint;
-    midPoint.x = self.bounds.origin.x + self.bounds.size.width / 2;
-    midPoint.y = self.bounds.origin.y + self.bounds.size.height / 2;
-    
-    CGPoint origin = CGPointZero;
-    origin = midPoint;
-    CGFloat scale = 10.0;
-    
-    [AxesDrawer drawAxesInRect:self.bounds originAtPoint:origin scale:scale];
+        
+    [AxesDrawer drawAxesInRect:self.bounds originAtPoint:self.origin scale:self.scale];
     
     // interpret program and graph
     [self drawFunction:[self.dataSource programForGraphView:self]
                 bounds:self.bounds
-                origin:origin
-                 scale:scale
+                origin:self.origin
+                 scale:self.scale
              inContext:context];
+}
+
+- (void)pinch:(UIPinchGestureRecognizer *)gesture {
+    if (gesture.state == UIGestureRecognizerStateChanged ||
+        gesture.state == UIGestureRecognizerStateEnded) {
+        self.scale *= gesture.scale;
+        gesture.scale = 1; // reset gesture scale;
+    }
+}
+
+- (void)pan:(UIPanGestureRecognizer *)gesture {
+    if ((gesture.state == UIGestureRecognizerStateChanged) ||
+        (gesture.state == UIGestureRecognizerStateEnded)) {
+        CGPoint trans = [gesture translationInView:self];
+        CGPoint newOrigin;
+        newOrigin.x = self.origin.x + trans.x;
+        newOrigin.y = self.origin.y + trans.y;
+        self.origin = newOrigin;
+        [gesture setTranslation:CGPointZero inView:self];
+        NSLog(@"PAN");
+    }
+}
+
+- (void)tap:(UITapGestureRecognizer *)gesture {
+    
 }
 
 @end

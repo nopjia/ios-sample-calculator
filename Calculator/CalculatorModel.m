@@ -155,9 +155,6 @@
         return result;
     }
     [stack removeLastObject];
-    NSLog(@"popped %@", topOfStack);
-    
-    // introspection
     
     // if number, return that number
     if ([topOfStack isKindOfClass:[NSNumber class]]) {
