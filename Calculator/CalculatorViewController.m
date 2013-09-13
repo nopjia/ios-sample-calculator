@@ -8,6 +8,7 @@
 
 #import "CalculatorViewController.h"
 #import "CalculatorModel.h"
+#import "GraphViewController.h"
 
 @interface CalculatorViewController ()
 
@@ -105,6 +106,13 @@
     
     [self updateCmdView];
     [self updateStackView];
+}
+
+- (IBAction)graphPressed:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"ShowGraph" sender:self];
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [segue.destinationViewController setProgram:self.calcModel.program];
 }
 
 @end

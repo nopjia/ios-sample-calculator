@@ -7,32 +7,40 @@
 //
 
 #import "GraphViewController.h"
+#import "GraphView.h"
+#import "CalculatorModel.h"
 
-@interface GraphViewController ()
-
+@interface GraphViewController () <GraphViewDataSource>
+@property (weak, nonatomic) IBOutlet GraphView *graphView;
 @end
 
 @implementation GraphViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+@synthesize program = _program;
+@synthesize graphView = _graphView;
+
+- (id)programForGraphView:(GraphView *)sender {
+    return self.program;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+- (id)program {
+    return _program;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setProgram:(id)program {
+    _program = program;
+    [self.graphView setNeedsDisplay];
+    [self setTitle:[CalculatorModel programDesc:program]];
+}
+
+- (void)setGraphView:(GraphView *)graphView {
+    // set
+    _graphView = graphView;
+    
+    // TODO handle gestures
+    
+    // set delegate
+    self.graphView.dataSource = self;
 }
 
 @end

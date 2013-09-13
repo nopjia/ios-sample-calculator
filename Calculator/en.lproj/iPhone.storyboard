@@ -403,7 +403,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="FxV-pT-clk" kind="push" id="r40-6c-8Wl"/>
+                                    <action selector="graphPressed:" destination="2" eventType="touchUpInside" id="7QV-qK-UFt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -495,6 +495,7 @@
                         <outlet property="cmdView" destination="P8V-T0-j0A" id="0S5-cB-apF"/>
                         <outlet property="display" destination="Kjr-Fj-qFA" id="GTP-gq-dPh"/>
                         <outlet property="stackView" destination="puG-fV-zh7" id="aRG-UW-rRo"/>
+                        <segue destination="FxV-pT-clk" kind="push" identifier="ShowGraph" id="1az-7j-yIP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -522,38 +523,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Graph" id="d5U-NW-bHw"/>
+                    <connections>
+                        <outlet property="graphView" destination="YJr-37-KR5" id="GDq-Pd-faM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PN8-ig-XPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="329" y="229"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CalculatorViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="clearPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="digitPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="operationPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="undoPressed:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="cmdView" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="display" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="stackView" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="GraphView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="dataSource"/>
-            </relationships>
-        </class>
-        <class className="GraphViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphViewController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

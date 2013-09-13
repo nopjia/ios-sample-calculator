@@ -27,23 +27,24 @@
     return self;
 }
 
+#define LINE_DETAIL 1
+
 - (void)drawFunction:(id)program
               bounds:(CGRect)screenBounds
               origin:(CGPoint)screenOrigin
                scale:(CGFloat)pointsPerUnit
            inContext:(CGContextRef)context {
     
-    double xmin = (screenBounds.origin.x - screenOrigin.x) / pointsPerUnit;
-    double xmax = xmin + screenBounds.size.width / pointsPerUnit;
-    
     UIGraphicsPushContext(context);
     
     // TODO draw function
     CGContextBeginPath(context);
     
+    [[UIColor redColor] setStroke];
+    
     // iterate across x pixels
-    for (int i = 0; i < screenBounds.size.width; ++i) {
-        // screen to world coords (i to x)
+    for (int i = 0; i < screenBounds.size.width; i+=LINE_DETAIL) {
+        // convert screen to world coords (i to x)
         double x = (i-screenOrigin.x)/pointsPerUnit;
         
         // eval program
@@ -51,10 +52,7 @@
                               [NSNumber numberWithDouble:x], @"x", nil];
         double y = [CalculatorModel runProgram:program withVars:vars];
         
-        // TODO TEST dummy function
-        y = sin(x);
-        
-        // world to screen coords (y to j)
+        // convert world to screen coords (y to j)
         int j = -y * pointsPerUnit + screenOrigin.y;
         
         // draw
