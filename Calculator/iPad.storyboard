@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="aGN-Dc-ycG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="QBb-Zw-j0T">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
-        <scene sceneID="eYO-e8-ogP">
+        <scene sceneID="jhh-Fi-Vkh">
             <objects>
-                <navigationController definesPresentationContext="YES" id="aGN-Dc-ycG" sceneMemberID="viewController">
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="k4A-pz-Dxa">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WbA-Xk-gU7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="qwZ-GZ-R90" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Bs5-9a-FOP">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="QBb-Zw-j0T" kind="relationship" relationship="rootViewController" id="wLK-kE-ZHi"/>
+                        <segue destination="Iy2-uQ-Irs" kind="relationship" relationship="rootViewController" id="NeC-k0-ZOu"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OK1-77-sI1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1529" y="-242"/>
+            <point key="canvasLocation" x="-42" y="-1718"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="JqE-pj-ChL">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qnw-DV-WMm" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <splitViewController id="QBb-Zw-j0T" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="rkJ-j9-67O"/>
                     <connections>
+                        <segue destination="qwZ-GZ-R90" kind="relationship" relationship="masterViewController" id="ERx-15-m9G"/>
                         <segue destination="auP-Im-BNR" kind="relationship" relationship="detailViewController" id="DWK-3N-CR2"/>
-                        <segue destination="Iy2-uQ-Irs" kind="relationship" relationship="masterViewController" id="amf-8q-IOK"/>
                     </connections>
                 </splitViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Qnw-DV-WMm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-586" y="-242"/>
+            <point key="canvasLocation" x="-1022" y="-1250"/>
         </scene>
         <!--Graph View Controller - Graph-->
         <scene sceneID="gFg-mT-OZD">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cl6-UH-2sZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="auP-Im-BNR" customClass="GraphViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mgt-Do-nzv">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHg-Ii-jhQ" customClass="GraphView">
@@ -61,9 +61,8 @@
                         <outlet property="graphView" destination="SHg-Ii-jhQ" id="y7w-kH-inn"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cl6-UH-2sZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="394" y="321"/>
+            <point key="canvasLocation" x="-42" y="-687"/>
         </scene>
         <!--Calculator View Controller - Calculator-->
         <scene sceneID="rZF-KS-m30">
@@ -546,7 +545,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoa-lD-U9q" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="394" y="-664"/>
+            <point key="canvasLocation" x="406" y="-1718"/>
         </scene>
     </scenes>
     <classes>

@@ -32,6 +32,9 @@
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
     doubleTap.numberOfTapsRequired = 2;
     [self addGestureRecognizer: doubleTap];
+    
+    // load user defaults
+    [self loadUserDefaults];
 }
 - (void)awakeFromNib {
     [self setup];
@@ -137,6 +140,8 @@
         gesture.state == UIGestureRecognizerStateEnded) {
         self.scale *= gesture.scale;
         gesture.scale = 1; // reset gesture scale;
+        
+        [self saveUserDefaults]; // save
     }
 }
 
@@ -148,12 +153,37 @@
         newOrigin.x = self.origin.x + trans.x;
         newOrigin.y = self.origin.y + trans.y;
         self.origin = newOrigin;
-        [gesture setTranslation:CGPointZero inView:self];
+        [gesture setTranslation:CGPointZero inView:self]; // reset
+        
+        [self saveUserDefaults]; // save
     }
 }
 
 - (void)doubleTap:(UITapGestureRecognizer *)gesture {
     self.origin = [gesture locationInView:self];
+    [self saveUserDefaults]; // save
+}
+
+- (void)saveUserDefaults {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSNumber numberWithFloat:self.origin.x] forKey:@"originX"];
+    [defaults setObject:[NSNumber numberWithFloat:self.origin.y] forKey:@"originY"];
+    [defaults setObject:[NSNumber numberWithFloat:self.scale] forKey:@"scale"];
+    [defaults synchronize];
+}
+- (void)loadUserDefaults {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *originX = [defaults objectForKey:@"originX"];
+    NSNumber *originY = [defaults objectForKey:@"originY"];
+    NSNumber *scale = [defaults objectForKey:@"scale"];
+    if (originX && originY && scale) {
+        CGPoint origin;
+        origin.x = [originX floatValue];
+        origin.y = [originY floatValue];
+        self.origin = origin;
+        self.scale = [scale floatValue];
+        NSLog(@"user default origin and scale loaded");
+    }
 }
 
 @end

@@ -109,10 +109,22 @@
 }
 
 - (IBAction)graphPressed:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"ShowGraph" sender:self];
+    if ([self splitViewGraphViewController])
+        [self splitViewGraphViewController].program = self.calcModel.program;
+    else
+        [self performSegueWithIdentifier:@"ShowGraph" sender:self];
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     [segue.destinationViewController setProgram:self.calcModel.program];
+}
+
+// get split view
+- (GraphViewController *)splitViewGraphViewController {
+    id gvc = [self.splitViewController.viewControllers lastObject];
+    if (![gvc isKindOfClass:[GraphViewController class]]) {
+        gvc = nil;
+    }
+    return gvc;
 }
 
 @end
