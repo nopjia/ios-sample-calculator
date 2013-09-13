@@ -17,7 +17,7 @@
 		30DC0CEC17DF8D4000FD1C8B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC0CEB17DF8D4000FD1C8B /* Default.png */; };
 		30DC0CEE17DF8D4000FD1C8B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC0CED17DF8D4000FD1C8B /* Default@2x.png */; };
 		30DC0CF017DF8D4000FD1C8B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC0CEF17DF8D4000FD1C8B /* Default-568h@2x.png */; };
-		30DC0CF317DF8D4000FD1C8B /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30DC0CF117DF8D4000FD1C8B /* MainStoryboard.storyboard */; };
+		30DC0CF317DF8D4000FD1C8B /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30DC0CF117DF8D4000FD1C8B /* iPhone.storyboard */; };
 		30DC0CF617DF8D4000FD1C8B /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DC0CF517DF8D4000FD1C8B /* CalculatorViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +37,7 @@
 		30DC0CEB17DF8D4000FD1C8B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		30DC0CED17DF8D4000FD1C8B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		30DC0CEF17DF8D4000FD1C8B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		30DC0CF217DF8D4000FD1C8B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		30DC0CF217DF8D4000FD1C8B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 		30DC0CF417DF8D4000FD1C8B /* CalculatorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalculatorViewController.h; sourceTree = "<group>"; };
 		30DC0CF517DF8D4000FD1C8B /* CalculatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,7 +88,7 @@
 			children = (
 				30DC0CE817DF8D4000FD1C8B /* CalculatorAppDelegate.h */,
 				30DC0CE917DF8D4000FD1C8B /* CalculatorAppDelegate.m */,
-				30DC0CF117DF8D4000FD1C8B /* MainStoryboard.storyboard */,
+				30DC0CF117DF8D4000FD1C8B /* iPhone.storyboard */,
 				308767AD17DFA31B00393A95 /* CalculatorModel.h */,
 				308767AE17DFA31B00393A95 /* CalculatorModel.m */,
 				30DC0CF417DF8D4000FD1C8B /* CalculatorViewController.h */,
@@ -168,7 +168,7 @@
 				30DC0CEC17DF8D4000FD1C8B /* Default.png in Resources */,
 				30DC0CEE17DF8D4000FD1C8B /* Default@2x.png in Resources */,
 				30DC0CF017DF8D4000FD1C8B /* Default-568h@2x.png in Resources */,
-				30DC0CF317DF8D4000FD1C8B /* MainStoryboard.storyboard in Resources */,
+				30DC0CF317DF8D4000FD1C8B /* iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,12 +197,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		30DC0CF117DF8D4000FD1C8B /* MainStoryboard.storyboard */ = {
+		30DC0CF117DF8D4000FD1C8B /* iPhone.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				30DC0CF217DF8D4000FD1C8B /* en */,
 			);
-			name = MainStoryboard.storyboard;
+			name = iPhone.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
