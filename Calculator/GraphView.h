@@ -13,7 +13,7 @@
 
 // delegation
 @protocol GraphViewDataSource
-- (id)programForGraphView:(GraphView *)sender;
+@property (nonatomic, readonly) id program;
 @end
 
 @interface GraphView : UIView

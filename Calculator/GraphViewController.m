@@ -19,14 +19,6 @@
 @synthesize program = _program;
 @synthesize graphView = _graphView;
 
-- (id)programForGraphView:(GraphView *)sender {
-    return self.program;
-}
-
-- (id)program {
-    return _program;
-}
-
 - (void)setProgram:(id)program {
     _program = program;
     [self.graphView setNeedsDisplay];

@@ -115,7 +115,7 @@
     
     [AxesDrawer drawAxesInRect:self.bounds originAtPoint:self.origin scale:self.scale];
     
-    [self drawFunction:[self.dataSource programForGraphView:self]
+    [self drawFunction:self.dataSource.program
                 bounds:self.bounds
                 origin:self.origin
                  scale:self.scale
