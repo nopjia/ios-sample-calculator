@@ -41,4 +41,35 @@
     self.graphView.dataSource = self;
 }
 
+- (void)viewDidLoad {
+    [self loadUserDefaults];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [self saveUserDefaults];
+}
+
+- (void)saveUserDefaults {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSNumber numberWithFloat:self.graphView.origin.x] forKey:@"originX"];
+    [defaults setObject:[NSNumber numberWithFloat:self.graphView.origin.y] forKey:@"originY"];
+    [defaults setObject:[NSNumber numberWithFloat:self.graphView.scale] forKey:@"scale"];
+    [defaults synchronize];
+}
+
+- (void)loadUserDefaults {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *originX = [defaults objectForKey:@"originX"];
+    NSNumber *originY = [defaults objectForKey:@"originY"];
+    NSNumber *scale = [defaults objectForKey:@"scale"];
+    if (originX && originY && scale) {
+        CGPoint origin;
+        origin.x = [originX floatValue];
+        origin.y = [originY floatValue];
+        self.graphView.origin = origin;
+        self.graphView.scale = [scale floatValue];
+        NSLog(@"user default origin and scale loaded");
+    }
+}
+
 @end
