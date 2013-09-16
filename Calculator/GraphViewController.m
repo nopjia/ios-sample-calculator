@@ -43,17 +43,17 @@
 
 - (void)saveUserDefaults {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[NSNumber numberWithFloat:self.graphView.origin.x] forKey:@"originX"];
-    [defaults setObject:[NSNumber numberWithFloat:self.graphView.origin.y] forKey:@"originY"];
-    [defaults setObject:[NSNumber numberWithFloat:self.graphView.scale] forKey:@"scale"];
+    [defaults setObject:[NSNumber numberWithFloat:self.graphView.origin.x] forKey:@"GraphViewController.originX"];
+    [defaults setObject:[NSNumber numberWithFloat:self.graphView.origin.y] forKey:@"GraphViewController.originY"];
+    [defaults setObject:[NSNumber numberWithFloat:self.graphView.scale] forKey:@"GraphViewController.scale"];
     [defaults synchronize];
 }
 
 - (void)loadUserDefaults {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *originX = [defaults objectForKey:@"originX"];
-    NSNumber *originY = [defaults objectForKey:@"originY"];
-    NSNumber *scale = [defaults objectForKey:@"scale"];
+    NSNumber *originX = [defaults objectForKey:@"GraphViewController.originX"];
+    NSNumber *originY = [defaults objectForKey:@"GraphViewController.originY"];
+    NSNumber *scale = [defaults objectForKey:@"GraphViewController.scale"];
     if (originX && originY && scale) {
         CGPoint origin;
         origin.x = [originX floatValue];
